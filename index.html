@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Password Generator</h1>
+        <div class="displayContainer">
+            <input readonly placeholder="Password" class="display" />
+            <button title="clickMe" class="data-copy">
+                <span class="data-copyMsg"></span>
+                <img src="./assets/copy.svg" alt="copy" width="23" height="23" />
+            </button>
+        </div>
+        <div class="inputContainer">
+            <div class="password-lenght">
+                <p>Password Length</p>` 
+                <p data-lengthNumber>0</p>
+            </div>
+
+            <!-- slider -->
+            <label for="passwordLength">Password Length:</label>
+            <input type="range" id="passwordLength" min="1" max="20" class="slider" step="1" data-length-Slider/>
+            <!--  -->
+
+            <!-- checkboxes -->
+            <div>
+                <input type="checkbox" id="upppercase" />
+                <label for="upppercase">Includes Uppercase letters</label>
+            </div>
+            <div>
+                <input type="checkbox" id="lowercase" />
+                <label for="lowercase">Includes Lowercase letters</label>
+            </div>
+            <div>
+                <input type="checkbox" id="numbers" />
+                <label for="numbers">Includes Numbers</label>
+            </div>
+            <div>
+                <input type="checkbox" id="symbols" />
+                <label for="symbols">Includes Symbols</label>
+
+                <!-- strength section -->
+                <div class="strength-container">
+                    <p>strength</p>
+                    <div data-indicator></div>
+                </div>
+                <!--  -->
+                <!-- generate password button -->
+                <button class="generateButton">GENERATE PASSWORD</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
