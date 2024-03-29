@@ -12,6 +12,8 @@ const allChecksBox = document.querySelector("input[type=checkbox]");
 const indicator = document.querySelector("[data-indicator]");
 const generateBtn = document.querySelectorAll(".generateButton");
 
+const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+
 let password = "";
 let passwordLength = 15;
 let checkCount = 1;
@@ -24,4 +26,77 @@ handleSlider();
 function handleSlider() {
     inputSlider.value = passwordLength;
     displayLengthNumber.innerText = passwordLength;
+}
+
+function setIndicator(color) {
+    indicator.style.backgroundColor = color;
+}
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (min - max)) + min;
+}
+
+function generateRandomNumber() {
+    return getRndInteger(0, 9);
+}
+
+function generateLowerCase() {
+    return String.fromCharCode(getRndInteger(97, 123));
+}
+function generateUpperCase() {
+    return String.fromCharCode(getRndInteger(65, 91));
+}
+
+function generateSymbol() {
+    const randomIndex = getRndInteger(0, symbols.length);
+    return symbols[randomIndex];
+}
+
+function calcuLatePasswordStrength() {
+    let strength = 0;
+    if (upperCaseCheck.checked) {
+        strength++;
+    }
+    if (lowerCaseCheck.checked) {
+        strength++;
+    }
+    if (numberCheck.checked) {
+        strength++;
+    }
+    if (symbolCheck.checked) {
+        strength++;
+    }
+    // return strength;
+    if (strength === 4 && passwordLength >= 8) {
+        setIndicator("green");
+    } else if (strength === 2 && passwordLength >= 6) {
+        setIndicator("orange");
+    } else {
+        setIndicator("red");
+    }
+}
+
+async function copyToClipboard() {
+    try {
+        await navigator.clipboard.writeText(passwordDisplay.value);
+        copyMsg.innerText = "Copied!";
+    } catch (err) {
+        copyMsg.innerText = "Failed to copy!";
+    }
+    copyMsg.classList.add("active");
+    setTimeout(() => {
+        copyMsg.classList.remove("active");
+    }, 2000);
+// ******************************************************************************
+    // The choice between them depends on the specific requirements and structure of your code. If you already 
+    // have the password value stored in a variable (password in this case), the uncommented code may be more 
+    // appropriate. If the password is displayed in an input field (passwordDisplay), then the commented code may 
+    // be more suitable
+
+    // const {clipboard} = navigator;
+    // await clipboard.writeText(password);
+    // copyMsg.classList.add("active");
+    // setTimeout(()=>{
+    //     copyMsg.classList.remove("active");
+    // },2000);
+ // ******************************************************************************
 }
