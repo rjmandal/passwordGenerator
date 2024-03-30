@@ -100,3 +100,80 @@ async function copyToClipboard() {
     // },2000);
  // ******************************************************************************
 }
+function handleCheckBoxChange(){
+    checkCount = 0;
+    allChecksBox.forEach((checkbox)=>{
+        if(checkbox.checked){
+            checkCount++;
+        }
+    })
+}
+
+if(passwordLength < checkCount){
+    passwordLength = checkCount; 
+    handleSlider();
+}
+
+allChecksBox.forEach((checkbox)=>{
+    checkbox.addEventListener('change',handleCheckBoxChange)
+})
+
+inputSlider.addEventListener("input",(e)=>{
+    passwordLength = e.target.value;
+    handleSlider();
+})
+copyBtn.addEventListener("click",()=>{
+    if(passwordDisplay.value){
+        copyToClipboard();
+    }
+})
+generateBtn.addEventListener('click',()=>{
+// none of the checks are selected
+    if(checkCount === 0){
+        return;
+    }
+    if(passwordLength < checkCount){
+        passwordLength = checkCount; 
+        handleSlider();
+    }
+    // let's start the password
+
+    // remove old password
+    password = "";
+    
+    // let's put the stuff based on checkboxes
+
+    if(upperCaseCheck.checked){
+        password+=generateUpperCase();
+    }
+    if(lowerCaseCheck.checked){
+        password+=generateLowerCase();
+    }
+    if(numberCheck.checked){
+        password+=generateRandomNumber();
+    }
+    if(symbolCheck.checked){
+        password+=generateSymbol();
+    }
+    // ******************************************************************************
+    let funcArr = [];
+
+    if(upperCaseCheck.checked){
+        funcArr.push(generateUpperCase);
+    }
+    if(lowerCaseCheck.checked){
+        funcArr.push(generateLowerCase);
+    }
+    if(numberCheck.checked){
+        funcArr.push(generateRandomNumber);
+    }
+    if(symbolCheck.checked){
+        funcArr.push(generateSymbol);
+    }
+   
+    // ******************************************************************************
+    // compulsory addition
+    for(let i=0; i<funcArr.length; i++){
+        password+=funcArr[i]();
+    }
+})
