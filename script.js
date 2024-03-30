@@ -8,14 +8,14 @@ const upperCaseCheck = document.querySelector("#uppercase");
 const lowerCaseCheck = document.querySelector("#lowercase");
 const numberCheck = document.querySelector("#numbers");
 const symbolCheck = document.querySelector("#symbols");
-const allChecksBox = document.querySelector("input[type=checkbox]");
+const allChecksBox = document.querySelectorAll("input[type=checkbox]");
 const indicator = document.querySelector("[data-indicator]");
-const generateBtn = document.querySelectorAll(".generateButton");
+const generateBtn = document.querySelector(".generateButton");
 
 const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
 let password = "";
-let passwordLength = 10;
+let passwordLength = 15;
 let checkCount = 1;
 
 // set strength color to grey 
@@ -24,8 +24,8 @@ let checkCount = 1;
 handleSlider();
 
 function handleSlider() {
-    displayLengthNumber.innerHTML = passwordLength;
     inputSlider.value = passwordLength;
+    displayLengthNumber.innerText = passwordLength;
 }
 
 function setIndicator(color) {
@@ -114,12 +114,10 @@ if(passwordLength < checkCount){
     handleSlider();
 }
 
-// allChecksBox.forEach((checkbox)=>{
-//     checkbox.addEventListener('change',handleCheckBoxChange)
-// })
-for(let box of allChecksBox){
-    box.addEventListener('change',handleCheckBoxChange);
-}
+allChecksBox.forEach((checkbox)=>{
+    checkbox.addEventListener('change',handleCheckBoxChange)
+})
+
 inputSlider.addEventListener("input",(e)=>{
     passwordLength = e.target.value;
     handleSlider();
@@ -145,18 +143,18 @@ generateBtn.addEventListener('click',()=>{
     
     // let's put the stuff based on checkboxes
 
-    if(upperCaseCheck.checked){
-        password+=generateUpperCase();
-    }
-    if(lowerCaseCheck.checked){
-        password+=generateLowerCase();
-    }
-    if(numberCheck.checked){
-        password+=generateRandomNumber();
-    }
-    if(symbolCheck.checked){
-        password+=generateSymbol();
-    }
+    // if(upperCaseCheck.checked){
+    //     password+=generateUpperCase();
+    // }
+    // if(lowerCaseCheck.checked){
+    //     password+=generateLowerCase();
+    // }
+    // if(numberCheck.checked){
+    //     password+=generateRandomNumber();
+    // }
+    // if(symbolCheck.checked){
+    //     password+=generateSymbol();
+    // }
     // ******************************************************************************
     let funcArr = [];
 
