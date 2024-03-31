@@ -19,7 +19,7 @@ let passwordLength = 8;
 let checkCount = 0;
 
 // set strength color to grey 
-
+setIndicator("#ccc");
 // set password length
 handleSlider();
 
@@ -32,7 +32,7 @@ function setIndicator(color) {
     indicator.style.backgroundColor = color;
 }
 function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (min - max)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function generateRandomNumber() {
@@ -78,10 +78,10 @@ function calcuLatePasswordStrength() {
     let hasLower = false;
     let hasNum = false;
     let hasSym = false;
-    if (uppercaseCheck.checked) hasUpper = true;
-    if (lowercaseCheck.checked) hasLower = true;
-    if (numbersCheck.checked) hasNum = true;
-    if (symbolsCheck.checked) hasSym = true;
+    if (upperCaseCheck.checked) hasUpper = true;
+    if (lowerCaseCheck.checked) hasLower = true;
+    if (numberCheck.checked) hasNum = true;
+    if (symbolCheck.checked) hasSym = true;
   
     if (hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8) {
       setIndicator("#0f0");
@@ -127,10 +127,7 @@ function shufflePassword(password){
     // fisher-yates shuffle
     for(let i = password.length-1; i>0; i--){
         const j = Math.floor(Math.random()*(i+1));
-        // [password[i],password[j]] = [password[j],password[i]];
-        const temp = password[i];
-        password[i] = password[j];
-        password[j] = temp;
+        [password[i],password[j]] = [password[j],password[i]];
     }
     let shuffledPassword = "";
     password.forEach((char)=>shufflePassword+=char);
@@ -218,7 +215,9 @@ generateBtn.addEventListener('click',()=>{
         const randomIndex = getRndInteger(0,funcArr.length);
         password+=funcArr[randomIndex]();
     }
-    password=shufflePassword(Array.from(password));
+
+    let passwordArr = Array.from(password);
+    password=shufflePassword(passwordArr);
     passwordDisplay.value = password;
     calcuLatePasswordStrength();
 })

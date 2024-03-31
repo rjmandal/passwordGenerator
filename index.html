@@ -5,6 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Password Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,14 +22,14 @@
             </button>
         </div>
         <div class="inputContainer">
-            <div class="password-lenght">
-                <p>Password Length</p> 
+            <div class="password-length">
+                <p>Password Length</p>
                 <p data-lengthNumber>0</p>
             </div>
 
             <!-- slider -->
             <label for="passwordLength">Password Length:</label>
-            <input type="range" id="passwordLength" min="1" max="20" class="slider" step="1" data-length-Slider/>
+            <input type="range" id="passwordLength" min="1" max="20" class="slider" step="1" data-length-Slider />
             <!--  -->
 
             <!-- checkboxes -->
@@ -49,7 +52,7 @@
                 <!-- strength section -->
                 <div class="strength-container">
                     <p>strength</p>
-                    <div data-indicator></div>
+                    <div class="indicator" data-indicator></div>
                 </div>
                 <!--  -->
                 <!-- generate password button -->
