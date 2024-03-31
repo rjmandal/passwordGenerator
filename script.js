@@ -15,8 +15,8 @@ const generateBtn = document.querySelector(".generateButton");
 const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
 let password = "";
-let passwordLength = 15;
-let checkCount = 1;
+let passwordLength = 8;
+let checkCount = 0;
 
 // set strength color to grey 
 
@@ -52,26 +52,47 @@ function generateSymbol() {
 }
 
 function calcuLatePasswordStrength() {
-    let strength = 0;
-    if (upperCaseCheck.checked) {
-        strength++;
-    }
-    if (lowerCaseCheck.checked) {
-        strength++;
-    }
-    if (numberCheck.checked) {
-        strength++;
-    }
-    if (symbolCheck.checked) {
-        strength++;
-    }
-    // return strength;
-    if (strength === 4 && passwordLength >= 8) {
-        setIndicator("green");
-    } else if (strength === 2 && passwordLength >= 6) {
-        setIndicator("orange");
+
+    // let strength = 0;
+    // if (upperCaseCheck.checked) {
+    //     strength++;
+    // }
+    // if (lowerCaseCheck.checked) {
+    //     strength++;
+    // }
+    // if (numberCheck.checked) {
+    //     strength++;
+    // }
+    // if (symbolCheck.checked) {
+    //     strength++;
+    // }
+    // // return strength;
+    // if (strength === 4 && passwordLength >= 8) {
+    //     setIndicator("green");
+    // } else if (strength === 2 && passwordLength >= 6) {
+    //     setIndicator("orange");
+    // } else {
+    //     setIndicator("red");
+    // }
+    let hasUpper = false;
+    let hasLower = false;
+    let hasNum = false;
+    let hasSym = false;
+    if (uppercaseCheck.checked) hasUpper = true;
+    if (lowercaseCheck.checked) hasLower = true;
+    if (numbersCheck.checked) hasNum = true;
+    if (symbolsCheck.checked) hasSym = true;
+  
+    if (hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8) {
+      setIndicator("#0f0");
+    } else if (
+      (hasLower || hasUpper) &&
+      (hasNum || hasSym) &&
+      passwordLength >= 6
+    ) {
+      setIndicator("#ff0");
     } else {
-        setIndicator("red");
+      setIndicator("#f00");
     }
 }
 
@@ -86,6 +107,7 @@ async function copyToClipboard() {
     setTimeout(() => {
         copyMsg.classList.remove("active");
     }, 2000);
+
 // ******************************************************************************
     // The choice between them depends on the specific requirements and structure of your code. If you already 
     // have the password value stored in a variable (password in this case), the uncommented code may be more 
@@ -99,6 +121,20 @@ async function copyToClipboard() {
     //     copyMsg.classList.remove("active");
     // },2000);
  // ******************************************************************************
+}
+// *********************************shuffle password*********************************************
+function shufflePassword(password){
+    // fisher-yates shuffle
+    for(let i = password.length-1; i>0; i--){
+        const j = Math.floor(Math.random()*(i+1));
+        // [password[i],password[j]] = [password[j],password[i]];
+        const temp = password[i];
+        password[i] = password[j];
+        password[j] = temp;
+    }
+    let shuffledPassword = "";
+    password.forEach((char)=>shufflePassword+=char);
+    return shuffledPassword;
 }
 function handleCheckBoxChange(){
     checkCount = 0;
@@ -155,7 +191,7 @@ generateBtn.addEventListener('click',()=>{
     // if(symbolCheck.checked){
     //     password+=generateSymbol();
     // }
-    // ******************************************************************************
+
     let funcArr = [];
 
     if(upperCaseCheck.checked){
@@ -176,4 +212,13 @@ generateBtn.addEventListener('click',()=>{
     for(let i=0; i<funcArr.length; i++){
         password+=funcArr[i]();
     }
+    // ******************************************************************************
+    // let's add the rest of the password
+    for(let i = 0; i<passwordLength-funcArr.length; i++){
+        const randomIndex = getRndInteger(0,funcArr.length);
+        password+=funcArr[randomIndex]();
+    }
+    password=shufflePassword(Array.from(password));
+    passwordDisplay.value = password;
+    calcuLatePasswordStrength();
 })
