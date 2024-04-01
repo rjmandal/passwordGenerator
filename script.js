@@ -125,6 +125,7 @@ async function copyToClipboard() {
 }
 // *********************************shuffle password*********************************************
 function shufflePassword(password){
+    console.log("shuffling password")
     // fisher-yates shuffle
     for(let i = password.length-1; i>0; i--){
         const j = Math.floor(Math.random()*(i+1));
@@ -132,6 +133,7 @@ function shufflePassword(password){
     }
     let shuffledPassword = "";
     password.forEach((char)=>shufflePassword+=char);
+    shuffledPassword = password.join("");
     return shuffledPassword;
 }
 function handleCheckBoxChange(){
@@ -141,11 +143,10 @@ function handleCheckBoxChange(){
             checkCount++;
         }
     })
-}
-
-if(passwordLength < checkCount){
-    passwordLength = checkCount; 
-    handleSlider();
+    if(passwordLength < checkCount){
+        passwordLength = checkCount; 
+        handleSlider();
+    }
 }
 
 allChecksBox.forEach((checkbox)=>{
