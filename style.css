@@ -31,7 +31,12 @@ body{
      flex-direction: column;
      justify-content: center;
      align-items: center;
-     background: linear-gradient(231deg, rgba(22,6,40,1) 0%, rgba(52,28,79,1) 50%, rgba(88,7,125,1) 100%);
+     
+
+    /* global 92%+ browsers support */
+    background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 255, 1) 0%, rgba(238, 130, 238, 1) 100%);
+
+     /* background: linear-gradient(231deg, rgba(22,6,40,1) 0%, rgba(52,28,79,1) 50%, rgba(88,7,125,1) 100%); */
 }
 .container{
     width: 90%;
