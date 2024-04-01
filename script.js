@@ -59,48 +59,48 @@ function generateSymbol() {
 
 function calcuLatePasswordStrength() {
 
-    let strength = 0;
-    if (upperCaseCheck.checked) {
-        strength++;
-    }
-    if (lowerCaseCheck.checked) {
-        strength++;
-    }
-    if (numberCheck.checked) {
-        strength++;
-    }
-    if (symbolCheck.checked) {
-        strength++;
-    }
-
-    if (strength === 4|| strength === 3 && passwordLength >= 8) {
-        setIndicator("green");
-    } else if (strength === 2 && passwordLength >= 6) {
-        setIndicator("orange");
-    } else {
-        setIndicator("red");
-    }
-
-    // let hasUpper = false;
-    // let hasLower = false;
-    // let hasNum = false;
-    // let hasSym = false;
-    // if (upperCaseCheck.checked) hasUpper = true;
-    // if (lowerCaseCheck.checked) hasLower = true;
-    // if (numberCheck.checked) hasNum = true;
-    // if (symbolCheck.checked) hasSym = true;
-  
-    // if (hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8) {
-    //   setIndicator("#0f0");
-    // } else if (
-    //   (hasLower || hasUpper) &&
-    //   (hasNum || hasSym) &&
-    //   passwordLength >= 6
-    // ) {
-    //   setIndicator("#ff0");
-    // } else {
-    //   setIndicator("#f00");
+    // let strength = 0;
+    // if (upperCaseCheck.checked) {
+    //     strength++;
     // }
+    // if (lowerCaseCheck.checked) {
+    //     strength++;
+    // }
+    // if (numberCheck.checked) {
+    //     strength++;
+    // }
+    // if (symbolCheck.checked) {
+    //     strength++;
+    // }
+
+    // if (strength === 4|| strength === 3 && passwordLength >= 8) {
+    //     setIndicator("green");
+    // } else if (strength === 2 && passwordLength >= 6) {
+    //     setIndicator("orange");
+    // } else {
+    //     setIndicator("red");
+    // }
+
+    let hasUpper = false;
+    let hasLower = false;
+    let hasNum = false;
+    let hasSym = false;
+    if (upperCaseCheck.checked) hasUpper = true;
+    if (lowerCaseCheck.checked) hasLower = true;
+    if (numberCheck.checked) hasNum = true;
+    if (symbolCheck.checked) hasSym = true;
+  
+    if (hasUpper && hasLower && (hasNum || hasSym) && passwordLength >= 8) {
+      setIndicator("#0f0");
+    } else if (
+      (hasLower || hasUpper) &&
+      (hasNum || hasSym) &&
+      passwordLength >= 6
+    ) {
+      setIndicator("#ff0");
+    } else {
+      setIndicator("#f00");
+    }
 }
 
 async function copyToClipboard() {
